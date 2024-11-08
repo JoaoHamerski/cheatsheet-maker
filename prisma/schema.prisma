@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  uuid      String   @default(uuid())
+  name      String
+  syncKey   String   @map("sync_key")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  cheatSheet CheatSheet[]
+
+  @@map("users")
+}
+
+model CheatSheet {
+  id        Int      @id @default(autoincrement())
+  uuid      String   @default(uuid())
+  userId    Int      @map("user_id")
+  title     String
+  alias     String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user           User             @relation(fields: [userId], references: [id])
+  cheatSheetItem CheatSheetItem[]
+
+  @@unique([userId, alias])
+  @@map("cheat_sheets")
+}
+
+model CheatSheetItem {
+  id           Int      @id @default(autoincrement())
+  uuid         String   @default(uuid())
+  cheatSheetId Int      @map("cheat_sheet_id")
+  title        String
+  body         String
+  isFixed      Boolean  @map("is_fixed")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  cheatSheet CheatSheet              @relation(fields: [cheatSheetId], references: [id])
+  tags       CheatSheetItemsOnTags[]
+
+  @@map("cheat_sheet_items")
+}
+
+model Tag {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  cheatSheetItems CheatSheetItemsOnTags[]
+
+  @@map("tags")
+}
+
+model CheatSheetItemsOnTags {
+  cheatSheetItemId Int @map("cheat_sheet_item_id")
+  tagId            Int @map("tag_id")
+
+  cheatSheetItem CheatSheetItem @relation(fields: [cheatSheetItemId], references: [id])
+  tag            Tag            @relation(fields: [tagId], references: [id])
+
+  @@id([cheatSheetItemId, tagId])
+  @@map("cheat_sheet_items_on_tags")
+}
