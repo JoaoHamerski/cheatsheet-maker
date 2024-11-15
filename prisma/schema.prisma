@@ -14,45 +14,40 @@ model User {
   id        Int      @id @default(autoincrement())
   uuid      String   @default(uuid())
   name      String
-  syncKey   String   @map("sync_key")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  syncKey   String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   cheatSheet CheatSheet[]
-
-  @@map("users")
 }
 
 model CheatSheet {
   id        Int      @id @default(autoincrement())
   uuid      String   @default(uuid())
-  userId    Int      @map("user_id")
+  userId    Int
   title     String
-  alias     String
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  alias     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   user           User             @relation(fields: [userId], references: [id])
   cheatSheetItem CheatSheetItem[]
 
   @@unique([userId, alias])
-  @@map("cheat_sheets")
 }
 
 model CheatSheetItem {
   id           Int      @id @default(autoincrement())
   uuid         String   @default(uuid())
-  cheatSheetId Int      @map("cheat_sheet_id")
+  cheatSheetId Int
   title        String
   body         String
-  isFixed      Boolean  @map("is_fixed")
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
+  isFixed      Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   cheatSheet CheatSheet              @relation(fields: [cheatSheetId], references: [id])
   tags       CheatSheetItemsOnTags[]
-
-  @@map("cheat_sheet_items")
 }
 
 model Tag {
@@ -60,17 +55,15 @@ model Tag {
   name String
 
   cheatSheetItems CheatSheetItemsOnTags[]
-
-  @@map("tags")
 }
 
 model CheatSheetItemsOnTags {
-  cheatSheetItemId Int @map("cheat_sheet_item_id")
-  tagId            Int @map("tag_id")
+  id               Int @id @default(autoincrement())
+  cheatSheetItemId Int
+  tagId            Int
 
   cheatSheetItem CheatSheetItem @relation(fields: [cheatSheetItemId], references: [id])
   tag            Tag            @relation(fields: [tagId], references: [id])
 
-  @@id([cheatSheetItemId, tagId])
-  @@map("cheat_sheet_items_on_tags")
+  @@unique([cheatSheetItemId, tagId])
 }
