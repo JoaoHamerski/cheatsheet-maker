@@ -12,8 +12,6 @@
     "lint:fix": "eslint . --fix",
     "prepare": "husky",
     "commit": "cz",
-    "seed": "npx prisma db seed",
-    "seed:sync": "npx @snaplet/seed sync",
     "test": "vitest"
   },
   "dependencies": {
@@ -33,8 +31,6 @@
     "@nuxt/test-utils": "^3.14.4",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@prisma/client": "^5.22.0",
-    "@snaplet/copycat": "^5.1.0",
-    "@snaplet/seed": "^0.98.0",
     "@vue/test-utils": "^2.4.6",
     "cz-conventional-changelog": "^3.3.0",
     "daisyui": "^4.12.13",
