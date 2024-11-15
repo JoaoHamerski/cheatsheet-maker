@@ -12,11 +12,15 @@
     "lint:fix": "eslint . --fix",
     "prepare": "husky",
     "commit": "cz",
-    "seed": "npx prisma db seed"
+    "seed": "npx prisma db seed",
+    "seed:sync": "npx @snaplet/seed sync",
+    "test": "vitest"
   },
   "dependencies": {
     "@nuxt/eslint": "^0.5.7",
     "@prisma/nuxt": "^0.0.35",
+    "@types/lodash-es": "^4.17.12",
+    "lodash-es": "^4.17.21",
     "nuxt": "^3.13.0",
     "vue": "latest",
     "vue-router": "latest"
@@ -26,20 +30,25 @@
     "@commitlint/config-conventional": "^19.5.0",
     "@commitlint/prompt-cli": "^19.5.0",
     "@faker-js/faker": "^9.2.0",
+    "@nuxt/test-utils": "^3.14.4",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@prisma/client": "^5.22.0",
     "@snaplet/copycat": "^5.1.0",
     "@snaplet/seed": "^0.98.0",
+    "@vue/test-utils": "^2.4.6",
     "cz-conventional-changelog": "^3.3.0",
     "daisyui": "^4.12.13",
     "eslint": "^9.12.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-vue": "^9.29.0",
+    "happy-dom": "^15.11.6",
     "husky": "^9.1.6",
+    "playwright-core": "^1.48.2",
     "prettier": "3.3.3",
     "tsx": "^4.19.2",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "vitest": "^2.1.5"
   },
   "config": {
     "commitizen": {
