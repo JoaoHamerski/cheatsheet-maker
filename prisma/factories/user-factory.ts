@@ -1,14 +1,17 @@
 import type { User } from '@prisma/client'
 import { faker } from '@faker-js/faker'
+import { generateSyncCode } from '~/server/utils/generate-sync-code'
 
-export const createUser = (overwrites: Partial<User> = {}): User => {
+export const makeUser = (overwrites: Partial<User> = {}): Partial<User> => {
+  const timestamp = faker.date.past()
+  const fullName = faker.person.firstName() + ' ' + faker.person.lastName()
+
   return {
-    id: 1,
     uuid: faker.string.uuid(),
-    name: faker.person.fullName(),
-    syncKey: faker.string.alpha(),
-    createdAt: faker.date.recent(),
-    updatedAt: faker.date.recent(),
+    name: fullName,
+    syncKey: generateSyncCode(),
+    createdAt: timestamp,
+    updatedAt: timestamp,
     ...overwrites,
   }
 }
