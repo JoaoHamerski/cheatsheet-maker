@@ -5,9 +5,7 @@ import { generateAlias } from '~/server/utils/generate-alias'
 
 type MakeCheatSheetFn = (overwrites?: Partial<CheatSheet>) => CheatSheet
 
-export const makeCheatSheet: MakeCheatSheetFn = (
-  overwrites = {},
-): CheatSheet => {
+export const makeCheatSheet: MakeCheatSheetFn = (overwrites = {}) => {
   const title = faker.lorem.words({ min: 2, max: 10 })
   const uuid = faker.string.uuid()
 
