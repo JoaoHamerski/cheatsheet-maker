@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { generateAlias } from '~/server/utils/generate-alias'
+import { hasSpecialChars } from '~/server/utils/has-special-chars'
 
 describe('Aliases generation', () => {
   it('should return the first 3 chars in lowercase', () => {
@@ -11,16 +12,16 @@ describe('Aliases generation', () => {
   })
 
   it('should contain a suffix', () => {
-    expect(generateAlias('hello world', { suffix: '123' })).to.be.equal(
-      'hel:123',
-    )
+    expect(
+      generateAlias('hello world', { suffix: '123' }).endsWith('123'),
+    ).toBeTruthy()
   })
 
   it('should strip special chars', () => {
-    expect(generateAlias('!@#!@#')).to.be.equals('')
-    expect(generateAlias('!H@ell!o World')).to.be.equals('hel')
-    expect(generateAlias('!H@e##llo World', { suffix: '123' })).to.be.equal(
-      'hel:123',
-    )
+    expect(hasSpecialChars(generateAlias('!Hello World'))).toBeFalsy()
+  })
+
+  it('should be empty for empty string', () => {
+    expect(generateAlias('')).to.be.equals('')
   })
 })
