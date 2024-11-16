@@ -1,7 +1,12 @@
+import { cheatSheetSeeder } from './seeders/cheat-sheet-seeder'
 import { userSeeder } from './seeders/user-seeder'
 
 async function main() {
-  await Promise.all([userSeeder()])
+  const SEEDERS = [userSeeder, cheatSheetSeeder]
+
+  for (const seed of SEEDERS) {
+    await seed()
+  }
 }
 
 main().then(() => {
