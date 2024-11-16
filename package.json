@@ -52,7 +52,7 @@
     }
   },
   "prisma": {
-    "seed": "tsx prisma/seed/seed.ts"
+    "seed": "tsx prisma/seed.ts"
   },
   "@snaplet/seed": {
     "config": "prisma/seed/seed.config.ts"
