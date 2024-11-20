@@ -10,9 +10,13 @@ export const cheatSheetSeeder = async () => {
   const cheatSheets = []
 
   for (const userId of userIds) {
-    const quantity = faker.number.int({ min: 0, max: 15 })
+    const CHEAT_SHEETS_PER_USER = faker.number.int({ min: 0, max: 15 })
 
-    cheatSheets.push(...times(quantity, () => makeCheatSheet({ userId })))
+    const generatedCheatSheets = times(CHEAT_SHEETS_PER_USER, () =>
+      makeCheatSheet({ userId }),
+    )
+
+    cheatSheets.push(...generatedCheatSheets)
   }
 
   await prisma.cheatSheet.createMany({
