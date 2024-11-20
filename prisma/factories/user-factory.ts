@@ -1,10 +1,9 @@
 import type { User } from '@prisma/client'
 import { faker } from '@faker-js/faker'
 import { generateSyncCode } from '~/server/utils/generate-sync-code'
+import type { FactoryFunction } from './types'
 
-type MakeUserFn = (overwrites?: Partial<User>) => User
-
-export const makeUser: MakeUserFn = (overwrites = {}) => {
+export const makeUser: FactoryFunction<User> = (overwrites = {}) => {
   const timestamp = faker.date.past()
   const fullName = faker.person.firstName() + ' ' + faker.person.lastName()
 
