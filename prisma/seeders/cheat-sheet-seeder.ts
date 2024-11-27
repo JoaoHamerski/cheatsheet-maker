@@ -2,7 +2,8 @@ import { faker } from '@faker-js/faker'
 import { flatten, times } from 'lodash-es'
 import prisma from '~/lib/prisma'
 import { makeCheatSheet } from '../factories/cheat-sheet-factory'
-import { getUserIds } from '../utils'
+import { pluckModelField } from '../utils'
+import type { User } from '@prisma/client'
 
 export const cheatSheetSeeder = async () => {
   await prisma.cheatSheet.createMany({
@@ -11,7 +12,7 @@ export const cheatSheetSeeder = async () => {
 }
 
 const generateCheatSheets = async () => {
-  const userIds = await getUserIds()
+  const userIds = (await pluckModelField('User', 'id')) as User['id'][]
 
   return flatten(userIds.map((userId) => generateUserCheatSheets(userId)))
 }
