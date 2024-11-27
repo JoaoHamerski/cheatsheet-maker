@@ -3,10 +3,12 @@ import { times } from 'lodash-es'
 import prisma from '~/lib/prisma'
 import { makeTag } from '../factories/tag-factory'
 
+const TAGS_QUANTITY = { min: 5, max: 20 }
+
 export const tagSeeder = async () => {
-  const TAGS_QUANTITY = faker.number.int({ min: 5, max: 20 })
+  const tagsQuantity = faker.number.int(TAGS_QUANTITY)
 
   await prisma.tag.createMany({
-    data: times(TAGS_QUANTITY, () => makeTag()),
+    data: times(tagsQuantity, () => makeTag()),
   })
 }

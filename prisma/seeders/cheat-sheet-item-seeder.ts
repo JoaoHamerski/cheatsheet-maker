@@ -5,6 +5,9 @@ import { makeCheatSheetItem } from '../factories/cheat-sheet-item-factory'
 import type { CheatSheetItem, CheatSheetItemsOnTags, Tag } from '@prisma/client'
 import { pluckModelField } from '../utils'
 
+const ITEMS_PER_CHEAT_SHEET = { min: 0, max: 20 }
+const TAGS_PER_ITEM = { min: 0, max: 5 }
+
 export const cheatSheetItemSeeder = async () => {
   const cheatSheetIds = (await pluckModelField(
     'CheatSheet',
@@ -19,11 +22,9 @@ export const cheatSheetItemSeeder = async () => {
 }
 
 const generateCheatSheetItem = (cheatSheetId: CheatSheetItem['id']) => {
-  const ITEMS_PER_CHEAT_SHEET = faker.number.int({ min: 0, max: 20 })
+  const itemsQuantity = faker.number.int(ITEMS_PER_CHEAT_SHEET)
 
-  return times(ITEMS_PER_CHEAT_SHEET, () =>
-    makeCheatSheetItem({ cheatSheetId }),
-  )
+  return times(itemsQuantity, () => makeCheatSheetItem({ cheatSheetId }))
 }
 
 const seedCheatSheetItemTags = async () => {
@@ -42,10 +43,10 @@ const generatePivot = (
   tagIds: Tag['id'][],
   cheatSheetItemId: CheatSheetItem['id'],
 ) => {
-  const TAGS_PER_ITEM = faker.number.int({ min: 0, max: 5 })
+  const tagsQuantity = faker.number.int(TAGS_PER_ITEM)
   const shuffledIds = shuffle(tagIds)
 
-  return times<Omit<CheatSheetItemsOnTags, 'id'>>(TAGS_PER_ITEM, (index) => ({
+  return times<Omit<CheatSheetItemsOnTags, 'id'>>(tagsQuantity, (index) => ({
     cheatSheetItemId,
     tagId: shuffledIds[index],
   }))

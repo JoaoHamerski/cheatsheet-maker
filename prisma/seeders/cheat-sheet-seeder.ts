@@ -5,6 +5,8 @@ import { makeCheatSheet } from '../factories/cheat-sheet-factory'
 import { pluckModelField } from '../utils'
 import type { User } from '@prisma/client'
 
+const CHEAT_SHEETS_PER_USER = { min: 0, max: 15 }
+
 export const cheatSheetSeeder = async () => {
   await prisma.cheatSheet.createMany({
     data: await generateCheatSheets(),
@@ -18,7 +20,7 @@ const generateCheatSheets = async () => {
 }
 
 const generateUserCheatSheets = (userId: number) => {
-  const CHEAT_SHEETS_PER_USER = faker.number.int({ min: 0, max: 15 })
+  const cheatSheetsQuantity = faker.number.int(CHEAT_SHEETS_PER_USER)
 
-  return times(CHEAT_SHEETS_PER_USER, () => makeCheatSheet({ userId }))
+  return times(cheatSheetsQuantity, () => makeCheatSheet({ userId }))
 }
