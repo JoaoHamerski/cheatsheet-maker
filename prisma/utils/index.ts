@@ -1,3 +1,3 @@
-import { getUserIds } from './get-user-ids'
+import { pluckModelField } from './pluck-model-field'
 
-export { getUserIds }
+export { pluckModelField }
