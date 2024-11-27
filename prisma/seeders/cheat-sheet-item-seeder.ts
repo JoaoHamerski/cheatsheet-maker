@@ -1,66 +1,52 @@
 import { faker } from '@faker-js/faker'
-import { map, shuffle, take, times } from 'lodash-es'
+import { flatten, shuffle, times } from 'lodash-es'
 import prisma from '~/lib/prisma'
 import { makeCheatSheetItem } from '../factories/cheat-sheet-item-factory'
-import type { CheatSheetItem, CheatSheetItemsOnTags } from '@prisma/client'
+import type { CheatSheetItem, CheatSheetItemsOnTags, Tag } from '@prisma/client'
+import { pluckModelField } from '../utils'
 
 export const cheatSheetItemSeeder = async () => {
-  const cheatSheetIds = (
-    await prisma.cheatSheet.findMany({
-      select: { id: true },
-    })
-  )
-    .map(({ id }) => id)
-    .sort()
+  const cheatSheetIds = (await pluckModelField(
+    'CheatSheet',
+    'id',
+  )) as CheatSheetItem['id'][]
 
-  const cheatSheetItems = []
-
-  for (const cheatSheetId of cheatSheetIds) {
-    const ITEMS_PER_CHEAT_SHEET = faker.number.int({ min: 0, max: 20 })
-
-    const generatedItems = times(ITEMS_PER_CHEAT_SHEET, () =>
-      makeCheatSheetItem({
-        cheatSheetId,
-      }),
-    )
-
-    cheatSheetItems.push(...generatedItems)
-  }
-
-  const createdItems = await prisma.cheatSheetItem.createManyAndReturn({
-    data: cheatSheetItems,
+  await prisma.cheatSheetItem.createMany({
+    data: flatten(cheatSheetIds.map((id) => generateCheatSheetItem(id))),
   })
 
-  await seedCheatSheetItemTags(createdItems)
+  await seedCheatSheetItemTags()
 }
 
-const seedCheatSheetItemTags = async (cheatSheetItems: CheatSheetItem[]) => {
-  const cheatSheetItemIds = map(cheatSheetItems, 'id')
+const generateCheatSheetItem = (cheatSheetId: CheatSheetItem['id']) => {
+  const ITEMS_PER_CHEAT_SHEET = faker.number.int({ min: 0, max: 20 })
 
-  const tagIds = (await prisma.tag.findMany({ select: { id: true } })).map(
-    ({ id }) => id,
+  return times(ITEMS_PER_CHEAT_SHEET, () =>
+    makeCheatSheetItem({ cheatSheetId }),
   )
+}
 
-  const pivots = []
-
-  for (const cheatSheetItemId of cheatSheetItemIds) {
-    const TAGS_PER_ITEM = faker.number.int({ min: 0, max: 5 })
-    const ids = take(shuffle(tagIds), 5)
-
-    const generatedPivots = times<Omit<CheatSheetItemsOnTags, 'id'>>(
-      TAGS_PER_ITEM,
-      (index) => {
-        return {
-          cheatSheetItemId,
-          tagId: ids[index],
-        }
-      },
-    )
-
-    pivots.push(...generatedPivots)
-  }
+const seedCheatSheetItemTags = async () => {
+  const tagIds = (await pluckModelField('Tag', 'id')) as Tag['id'][]
+  const cheatSheetItemIds = (await pluckModelField(
+    'CheatSheetItem',
+    'id',
+  )) as CheatSheetItem['id'][]
 
   await prisma.cheatSheetItemsOnTags.createMany({
-    data: pivots,
+    data: flatten(cheatSheetItemIds.map((id) => generatePivot(tagIds, id))),
   })
+}
+
+const generatePivot = (
+  tagIds: Tag['id'][],
+  cheatSheetItemId: CheatSheetItem['id'],
+) => {
+  const TAGS_PER_ITEM = faker.number.int({ min: 0, max: 5 })
+  const shuffledIds = shuffle(tagIds)
+
+  return times<Omit<CheatSheetItemsOnTags, 'id'>>(TAGS_PER_ITEM, (index) => ({
+    cheatSheetItemId,
+    tagId: shuffledIds[index],
+  }))
 }
