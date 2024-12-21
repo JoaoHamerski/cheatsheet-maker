@@ -7,8 +7,19 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@prisma/nuxt',
     '@nuxt/test-utils/module',
+    '@nuxt/fonts',
   ],
   prisma: {
     autoSetupPrisma: true,
+  },
+  css: ['@/assets/css/main.css'],
+  fonts: {
+    defaults: {
+      weights: [300, 400, 500, 600, 700],
+    },
+    providers: {
+      google: false,
+    },
+    priority: ['bunny'],
   },
 })
