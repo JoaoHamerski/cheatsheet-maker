@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     '@prisma/nuxt',
     '@nuxt/test-utils/module',
     '@nuxt/fonts',
+    '@nuxt/icon',
   ],
   prisma: {
     autoSetupPrisma: true,
