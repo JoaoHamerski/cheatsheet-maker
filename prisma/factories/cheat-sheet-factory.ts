@@ -8,7 +8,7 @@ export const makeCheatSheet: FactoryFunction<CheatSheet> = (
   overwrites = {},
 ) => {
   const timestamp = faker.date.past()
-  const title = faker.lorem.words({ min: 2, max: 10 })
+  const title = faker.lorem.words({ min: 2, max: 4 })
   const uuid = faker.string.uuid()
 
   return {
