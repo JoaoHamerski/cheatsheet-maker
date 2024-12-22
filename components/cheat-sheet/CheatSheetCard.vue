@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import type { CheatSheetItem } from '@prisma/client'
+import type { CheatSheetsWithItems } from '~/server/api/cheat-sheets.get'
 
 defineProps<{
-  cheatSheetItem: CheatSheetItem
+  cheatSheet: CheatSheetsWithItems[number]
 }>()
 </script>
 
 <template>
   <div
-    class="flex items-center justify-center p-4 text-xl font-bold text-center text-gray-900 rounded-lg shadow-lg bg-primary"
+    class="flex flex-col text-gray-300 rounded-lg shadow-lg bg-slate-900 overflow-hidden"
   >
-    {{ cheatSheetItem.title }}
+    <CheatSheetCardHeader :title="cheatSheet.title" />
+    <CheatSheetCardBody :cheat-sheet-items="cheatSheet.cheatSheetItems" />
+    <CheatSheetCardFooter :cheat-sheet="cheatSheet" />
   </div>
 </template>
