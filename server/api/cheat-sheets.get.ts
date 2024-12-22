@@ -9,6 +9,7 @@ const getCheatSheetWithItems = async () => {
   return prisma.cheatSheet.findMany({
     select: {
       title: true,
+      alias: true,
       _count: { select: { cheatSheetItems: true } },
       cheatSheetItems: { take: 5 },
     },

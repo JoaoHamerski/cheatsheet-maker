@@ -8,10 +8,13 @@ defineProps<{
 
 <template>
   <div
-    class="flex flex-col text-gray-300 rounded-lg shadow-lg bg-slate-900 overflow-hidden"
+    class="flex flex-col group text-gray-300 rounded-lg shadow-lg bg-slate-900 overflow-hidden py-3 h-full"
   >
-    <CheatSheetCardHeader :title="cheatSheet.title" />
-    <CheatSheetCardBody :cheat-sheet-items="cheatSheet.cheatSheetItems" />
+    <CheatSheetCardHeader :cheat-sheet="cheatSheet" />
+    <CheatSheetCardBody
+      class="grow"
+      :cheat-sheet-items="cheatSheet.cheatSheetItems"
+    />
     <CheatSheetCardFooter :cheat-sheet="cheatSheet" />
   </div>
 </template>
