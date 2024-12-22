@@ -26,4 +26,4 @@ const vueRules = [
   },
 ]
 
-export default withNuxt(eslintPluginPrettierRecommended, vueRules)
+export default withNuxt(vueRules, eslintPluginPrettierRecommended)
