@@ -30,8 +30,8 @@ model CheatSheet {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user           User             @relation(fields: [userId], references: [id])
-  cheatSheetItem CheatSheetItem[]
+  user            User             @relation(fields: [userId], references: [id])
+  cheatSheetItems CheatSheetItem[]
 
   @@unique([userId, alias])
 }
