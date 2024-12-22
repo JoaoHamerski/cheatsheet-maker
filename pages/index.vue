@@ -3,8 +3,8 @@
 </script>
 
 <template>
-  <IndexHeader
-    a="1"
-    b="2"
-  />
+  <div class="container mx-auto">
+    <IndexHeader />
+    <IndexBody />
+  </div>
 </template>
