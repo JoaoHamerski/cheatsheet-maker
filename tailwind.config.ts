@@ -1,21 +1,19 @@
 import type { Config } from 'tailwindcss'
-import daisyUI from 'daisyui'
-import daisyUIThemes from 'daisyui/src/theming/themes'
+import colors from 'tailwindcss/colors'
 
 export default <Partial<Config>>{
-  plugins: [daisyUI],
-  daisyui: {
-    themes: [
-      {
-        dark: {
-          ...daisyUIThemes['dark'],
-          primary: '#0070E8',
-          secondary: '#6A4C93',
-          warning: '#FFCA3A',
-          error: '#ff595e',
-          success: '#8AC926',
-        },
-      },
-    ],
+  theme: {
+    colors: {
+      ...colors,
+      'primary': '#0070E8',
+      'primary-darker': '#3282D8',
+      'secondary': '#00E8C9',
+      'warning': '#FFCA3A',
+      'error': '#ff595e',
+      'success': '#24E16D',
+      'base-100': '#1d232a',
+      'base-200': '#191e24',
+      'base-300': '#15191e',
+    },
   },
 }
