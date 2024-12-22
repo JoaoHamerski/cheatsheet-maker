@@ -1,7 +1,6 @@
 import { faker } from '@faker-js/faker'
 import type { CheatSheet } from '@prisma/client'
 import { upperFirst } from 'lodash-es'
-import { generateAlias } from '~/server/utils/generate-alias'
 import type { FactoryFunction } from './types'
 
 export const makeCheatSheet: FactoryFunction<CheatSheet> = (
@@ -14,7 +13,7 @@ export const makeCheatSheet: FactoryFunction<CheatSheet> = (
   return {
     title: upperFirst(title),
     uuid,
-    alias: generateAlias(title, { suffix: uuid.slice(0, 3) }),
+    alias: title.substring(0, 6).toLocaleLowerCase(),
     createdAt: timestamp,
     updatedAt: timestamp,
     ...overwrites,
