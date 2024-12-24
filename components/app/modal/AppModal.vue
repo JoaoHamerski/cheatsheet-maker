@@ -49,7 +49,7 @@ withDefaults(defineProps<AppModalProps>(), {
     >
       <AppModalBackdrop />
 
-      <div class="fixed inset-0 overflow-y-auto">
+      <div class="fixed inset-0 overflow-y-auto overflow-x-hidden">
         <div
           class="flex w-screen min-h-full items-center justify-center p-4 text-center"
         >
