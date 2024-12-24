@@ -6,10 +6,9 @@ export default <Partial<Config>>{
     colors: {
       ...colors,
       'primary': '#0070E8',
-      'primary-darker': '#3282D8',
       'secondary': '#00E8C9',
       'warning': '#FFCA3A',
-      'error': '#ff595e',
+      'danger': '#ff595e',
       'success': '#24E16D',
       'base-100': '#1d232a',
       'base-200': '#191e24',
