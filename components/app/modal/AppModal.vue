@@ -61,6 +61,7 @@ withDefaults(defineProps<AppModalProps>(), {
               class="w-full transform overflow-hidden rounded-2xl bg-base-100 p-5 text-left align-middle shadow-xl transition-all"
               :class="MODAL_SIZES[size]"
             >
+              <AppModalCloseBtn @click="$emit('update:modelValue', false)" />
               <DialogTitle
                 v-if="$slots['title']"
                 as="h3"
