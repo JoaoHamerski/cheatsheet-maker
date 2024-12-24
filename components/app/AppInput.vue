@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Icon } from '#build/components'
+import type { InputHTMLAttributes } from 'vue'
 
 interface AppInputProps {
   id?: string
@@ -8,6 +9,7 @@ interface AppInputProps {
   placeholder?: string
   icon?: InstanceType<typeof Icon>['$props']
   inputClass?: string
+  pt?: InputHTMLAttributes
 }
 
 const modelValue = defineModel<string | number>()
@@ -20,6 +22,7 @@ const props = withDefaults(defineProps<AppInputProps>(), {
   icon: undefined,
   inputClass: '',
   kbd: undefined,
+  pt: undefined,
 })
 
 const inputId = computed(() => props.name ?? props.id)
@@ -55,6 +58,7 @@ const onInput = (event: Event) => {
         :placeholder="placeholder"
         :name="name"
         :value="modelValue"
+        v-bind="pt"
         @input="onInput"
       />
       <div v-if="$slots['append']">
