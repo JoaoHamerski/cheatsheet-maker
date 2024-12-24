@@ -3,7 +3,7 @@ import type { Icon } from '#build/components'
 
 const COLOR_CLASSES = {
   primary: 'bg-primary hover:bg-blue-500',
-  success: 'bg-success hover:bg-green-500',
+  success: 'bg-success hover:bg-green-400',
 }
 
 interface AppButtonProps {
@@ -12,6 +12,7 @@ interface AppButtonProps {
   icon?: InstanceType<typeof Icon>['$props']
   disabled?: boolean
   animated?: boolean
+  block?: boolean
 }
 
 const props = withDefaults(defineProps<AppButtonProps>(), {
@@ -19,12 +20,14 @@ const props = withDefaults(defineProps<AppButtonProps>(), {
   icon: undefined,
   disabled: false,
   animated: false,
+  default: false,
 })
 
 const classes = computed(() => [
   COLOR_CLASSES[props.color],
   {
     'hover:scale-[1.02] active:scale-100 ': props.animated,
+    'justify-center w-full': props.block,
   },
 ])
 </script>
