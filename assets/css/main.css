@@ -1,15 +1,26 @@
 @import 'tippy';
+@import 'colors';
 @import url(https://fonts.bunny.net/css?family=albert-sans:300,400,500,600,700);
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer base {
-  :root,
-  .html,
-  .body {
-    @apply h-full dark:bg-base-100;
+  :root, .html, .body {
+    @apply h-full dark:bg-base-100 ;
+
     font-family: 'Albert Sans';
   }
+}
+
+@layer utilities {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active,
+  input::spelling-error {
+    box-shadow: 0 0 0 40rem rgb(var(--input-bg)) inset;
+    -webkit-text-fill-color: theme('colors.blue.300');
+    caret-color: theme('colors.gray.300');
+  } 
 }
