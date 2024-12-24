@@ -22,5 +22,5 @@
     box-shadow: 0 0 0 40rem rgb(var(--input-bg)) inset;
     -webkit-text-fill-color: theme('colors.blue.300');
     caret-color: theme('colors.gray.300');
-  } 
+  }
 }
