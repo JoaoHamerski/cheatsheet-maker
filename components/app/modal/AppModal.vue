@@ -58,7 +58,7 @@ withDefaults(defineProps<AppModalProps>(), {
             v-bind="MODAL_TRANSITIONS"
           >
             <DialogPanel
-              class="w-full transform overflow-hidden rounded-2xl bg-gray-300 p-5 text-left align-middle shadow-xl transition-all"
+              class="w-full transform overflow-hidden rounded-2xl bg-base-100 p-5 text-left align-middle shadow-xl transition-all"
               :class="MODAL_SIZES[size]"
             >
               <DialogTitle

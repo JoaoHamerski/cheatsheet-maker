@@ -10,7 +10,7 @@ defineProps<{
   <div class="mx-4">
     <AppBadge
       v-tippy="'Items on this sheet'"
-      class="bg-blue-800"
+      class="bg-slate-900"
       :icon="{
         name: 'ph:article-fill',
       }"

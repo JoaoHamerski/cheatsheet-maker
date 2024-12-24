@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="px-4 pb-2 w-full border-b-2 border-blue-900">
+  <div class="px-4 pb-2 w-full border-b-2 border-slate-700">
     <div class="font-bold flex items-center gap-2">
       <Icon name="ph:scroll-fill"></Icon>
       <span class="text-white">{{ cheatSheet.title }}</span>
