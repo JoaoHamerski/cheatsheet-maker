@@ -9,6 +9,7 @@ defineProps<{
 <template>
   <div class="mx-4">
     <AppBadge
+      v-if="cheatSheet._count.cheatSheetItems"
       v-tippy="'Items on this sheet'"
       class="bg-slate-900"
       :icon="{
