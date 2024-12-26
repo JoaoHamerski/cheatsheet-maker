@@ -8,7 +8,6 @@ interface AppInputProps {
   label?: string
   placeholder?: string
   icon?: InstanceType<typeof Icon>['$props']
-  inputClass?: string
   pt?: InputHTMLAttributes
 }
 
@@ -20,7 +19,6 @@ const props = withDefaults(defineProps<AppInputProps>(), {
   label: '',
   placeholder: '',
   icon: undefined,
-  inputClass: '',
   kbd: undefined,
   pt: undefined,
 })
@@ -54,7 +52,6 @@ const onInput = (event: Event) => {
         :id="inputId"
         type="text"
         class="bg-transparent text-gray-300 focus:outline-none w-full"
-        :class="inputClass"
         :placeholder="placeholder"
         :name="name"
         :value="modelValue"
