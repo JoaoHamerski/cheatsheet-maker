@@ -6,7 +6,9 @@
       name: 'ph:magnifying-glass-bold',
       size: '2rem',
     }"
-    input-class="text-lg placeholder:italic"
+    :pt="{
+      class: 'text-lg placeholder:italic',
+    }"
   >
     <template #append>
       <IndexHeaderSearchKbds />
