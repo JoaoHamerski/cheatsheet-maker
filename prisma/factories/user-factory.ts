@@ -1,6 +1,5 @@
 import type { User } from '@prisma/client'
 import { faker } from '@faker-js/faker'
-import { generateSyncCode } from '~/server/utils/generate-sync-code'
 import type { FactoryFunction } from './types'
 
 export const makeUser: FactoryFunction<User> = (overwrites = {}) => {
@@ -10,7 +9,7 @@ export const makeUser: FactoryFunction<User> = (overwrites = {}) => {
   return {
     uuid: faker.string.uuid(),
     name: fullName,
-    syncKey: generateSyncCode(),
+    syncKey: faker.string.uuid(),
     createdAt: timestamp,
     updatedAt: timestamp,
     ...overwrites,
