@@ -13,7 +13,7 @@ datasource db {
 model User {
   id        Int      @id @default(autoincrement())
   uuid      String   @default(uuid())
-  name      String
+  name      String?
   syncKey   String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
