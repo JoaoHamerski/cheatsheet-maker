@@ -13,7 +13,9 @@ export const makeCheatSheet: FactoryFunction<CheatSheet> = (
   return {
     title: upperFirst(title),
     uuid,
-    alias: title.substring(0, 6).toLocaleLowerCase(),
+    alias:
+      title.substring(0, 3).toLocaleLowerCase() +
+      faker.string.uuid().substring(0, 3),
     createdAt: timestamp,
     updatedAt: timestamp,
     ...overwrites,
