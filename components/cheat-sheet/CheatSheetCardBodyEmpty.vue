@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center justify-center h-full">
+  <div class="flex flex-col items-center justify-center h-full py-5">
     <a
       href=""
       class="flex flex-col gap-3 items-center justify-center h-full bg-red hover:text-white transition-colors"

@@ -5,7 +5,10 @@ const open = ref(false)
 <template>
   <AppModal v-model="open">
     <template #body>
-      <form action="#">
+      <form
+        action="/cheat-sheets/create"
+        method="POST"
+      >
         <div class="flex flex-col gap-12 mt-5">
           <div class="text-center text-gray-300">
             <Icon
@@ -13,12 +16,13 @@ const open = ref(false)
               size="4rem"
             />
           </div>
+
           <AppInput
             name="sheet-name"
             placeholder="Type the sheet name..."
-            input-class="text-center h-10 text-xl"
-            :pt="{ tabindex: 1 }"
+            :pt="{ tabindex: 1, class: 'text-center h-10 text-xl' }"
           />
+
           <AppButton
             label="CREATE"
             block
