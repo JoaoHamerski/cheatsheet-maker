@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CheatSheetsWithItems } from '~/server/api/cheat-sheets/index.get'
+import type { CheatSheetsWithItems } from '~/server/routes/cheat-sheets/index.get'
 
 defineProps<{
   cheatSheet: CheatSheetsWithItems[number]

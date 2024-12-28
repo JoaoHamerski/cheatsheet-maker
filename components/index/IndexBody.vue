@@ -1,5 +1,5 @@
 <script setup>
-const { data: cheatSheets } = await useFetch('/api/cheat-sheets')
+const { data: cheatSheets } = await useFetch('/cheat-sheets')
 </script>
 
 <template>
