@@ -5,7 +5,7 @@ import { object, string } from 'yup'
 
 export default defineEventHandler(async (event) => {
   const data = await readBody(event)
-  const user = await getUser(event)
+  const user = await getOrCreateUser(event)
 
   const schema = object({
     sheet_title: string().required().min(3),
@@ -31,6 +31,6 @@ export default defineEventHandler(async (event) => {
   }
 })
 
-const getUser = async (event: H3Event) => {
+const getOrCreateUser = async (event: H3Event) => {
   return (await auth.user(event)) ?? (await auth.register(event))
 }
