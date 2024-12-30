@@ -19,4 +19,4 @@ const defineMiddlewareEventHandler: DefineMiddlewareEventHandlerFn = (
   })
 }
 
-export default { defineMiddlewareEventHandler }
+export default defineMiddlewareEventHandler

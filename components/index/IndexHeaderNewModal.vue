@@ -9,7 +9,7 @@ const form = ref({
 
 const submit = async () => {
   try {
-    await $fetch('/cheat-sheets/create', {
+    await $fetch('/api/cheat-sheets/create', {
       method: 'POST',
       body: form.value,
     })

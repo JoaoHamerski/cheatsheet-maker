@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { CheatSheetsWithItems } from '~/server/routes/cheat-sheets/index.get'
+import type { CheatSheetsIndex } from '~/server/routes/api/cheat-sheets/index.get'
 
 defineProps<{
-  cheatSheet: CheatSheetsWithItems[number]
+  cheatSheet: CheatSheetsIndex[number]
 }>()
 </script>
 
@@ -13,6 +13,7 @@ defineProps<{
     <CheatSheetCardHeader :cheat-sheet="cheatSheet" />
     <CheatSheetCardBody
       class="grow"
+      :cheat-sheet-uuid="cheatSheet.uuid"
       :cheat-sheet-items="cheatSheet.cheatSheetItems"
     />
     <CheatSheetCardFooter :cheat-sheet="cheatSheet" />

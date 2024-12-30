@@ -2,6 +2,7 @@
 import type { CheatSheetItem } from '@prisma/client'
 
 defineProps<{
+  cheatSheetUuid: string
   cheatSheetItems: CheatSheetItem[]
 }>()
 </script>
@@ -12,6 +13,9 @@ defineProps<{
       v-if="cheatSheetItems.length"
       :cheat-sheet-items="cheatSheetItems"
     />
-    <CheatSheetCardBodyEmpty v-else />
+    <CheatSheetCardBodyEmpty
+      v-else
+      :cheat-sheet-uuid="cheatSheetUuid"
+    />
   </div>
 </template>
