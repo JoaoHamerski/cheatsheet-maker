@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     autoSetupPrisma: true,
   },
   alias: {
-    ".prisma/client/index-browser": "./node_modules/.prisma/client/index-browser.js"
+    '.prisma/client/index-browser': './node_modules/.prisma/client/index-browser.js'
   },
   css: ['@/assets/css/main.css'],
 })
